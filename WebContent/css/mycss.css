@@ -1,0 +1,612 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, input, button,
+	label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article,
+	aside, canvas, details, embed, figure, figcaption, footer, header,
+	hgroup, menu, nav, output, ruby, section, summary, time, mark, audio,
+	video {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+}
+
+#myVideo {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: auto;
+	height: auto;
+}
+
+@media ( max-width : 991.98px) {
+	#myVideo {
+		display: none;
+	}
+	.site-hero {
+		background-image: url(../banner/banner1.jpg);
+	}
+	.nav-links {
+		display: none;
+	}
+	.js-site-menu-toggle {
+		display: inline-block;
+	}
+}
+
+@media ( min-width : 991.98px) {
+	.site-navbar {
+		display: none;
+	}
+}
+
+.navbar-nav>li {
+	display: inline-block;
+	width: 14%
+}
+
+.navbar-nav>li>a {
+	font-size: 20px;
+	color: #f7b731;
+	border-bottom: 1px solid transparent
+}
+
+.navbar-nav>li:hover a {
+	color: #333;
+	border-bottom: 2px solid #f7b731
+}
+
+#map {
+	height: 100%; /* The height is 400 pixels */
+	width: 100%; /* The width is the width of the web page */
+}
+
+@media ( max-width : 991.98px) {
+	#map {
+		height: 400px;
+	}
+}
+
+@media ( max-width : 991.98px) {
+	.site-navbar {
+		width: 30%
+	}
+}
+
+@media ( max-width : 570px) {
+	.site-navbar {
+		width: 45%
+	}
+}
+
+@media ( max-width : 438px) {
+	.site-navbar {
+		width: 55%
+	}
+}
+
+#dgwrap-header {
+	position: relative;
+	width: 100%;
+	height: 76px;
+	z-index: 10;
+	overflow: visible;
+}
+
+#dgwrap-header.selected {
+	height: 170px;
+	z-index: 10;
+	background-color: 0 5px 20px -5px rgba(0, 0, 0, 0.1);
+}
+
+#dgwrap-header nav {
+	overflow: hidden;
+}
+
+#dgwrap-header nav>* {
+	float: left;
+}
+
+#dgwrap-header nav h1 {
+	display: block;
+	margin: 12px 65px 0px 20px;
+}
+
+#dgwrap-header nav h1 a {
+	display: block;
+}
+
+#dgwrap-header nav>ul {
+	height: 60px;
+	overflow: hidden;
+	-webkit-text-stroke-width: medium;
+	display: flex;
+	width: 100%;
+}
+
+#dgwrap-header nav>ul>li {
+	float: left;
+	height: 76px;
+	padding: 20px;
+	width: -webkit-fill-available;
+	text-align: center;
+}
+
+#dgwrap-header nav>ul>li>a {
+	height: 18px;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+
+#dgwrap-header nav>ul>li.menu_1>a {
+	width: 70px;
+	margin-left: 0px;
+	background-position: 0px -50px;
+	font-size: 20px;
+}
+
+#dgwrap-header nav>ul>li.menu_2>a {
+	width: 66px;
+	background-position: -80px -50px;
+	font-size: 20px;
+}
+
+#dgwrap-header nav>ul>li.menu_3>a {
+	width: 31px;
+	margin: 29px 55px 0px 55px;
+	background-position: -156px -50px;
+	font-size: 20px;
+}
+
+#dgwrap-header nav>ul>li.menu_4>a {
+	width: 65px;
+	background-position: -197px -50px;
+	font-size: 20px;
+}
+
+#dgwrap-header nav>ul>li.menu_5>a {
+	width: 85px;
+	background-position: -272px -50px;
+	font-size: 20px;
+}
+
+#dgwrap-header nav>ul>li.menu_6>a {
+	width: 100%;
+	background-position: 0px -78px;
+	font-size: 20px;
+}
+
+#dgwrap-header nav>ul.header_right {
+	float: right;
+}
+
+#dgwrap-header nav>ul.header_right>li {
+	float: left;
+}
+
+#dgwrap-header nav>ul.header_right>li>a {
+	margin: 27px 20px 0px 10px;
+}
+
+#dgwrap-header nav>ul.header_right>li.right_facebook>a {
+	width: 14px;
+	height: 23px;
+	background-position: -75px -78px;
+}
+
+#dgwrap-header nav>ul.header_right>li.right_facebook>a:hover {
+	background-position: -75px -110px;
+}
+
+#dgwrap-header nav>ul.header_right>li.right_youtube>a {
+	width: 32px;
+	height: 23px;
+	background-position: -99px -78px;
+}
+
+#dgwrap-header nav>ul.header_right>li.right_youtube>a:hover {
+	background-position: -99px -110px;
+}
+
+#dgwrap-header nav>.header_depth2 {
+	display: none;
+	width: 100%;
+	border-top: 1px #f5f6f7 solid;
+	overflow: hidden;
+	background-color: rgba(255, 255, 255, 0.98);
+	z-index: 1;
+}
+
+/* 드롭 다운 위쪽 nav 부분 */
+#dgwrap-header nav>.header_depth2 .depth2_wrap {
+	overflow: hidden;
+	background: #f2f4fb;
+	height: 170px;
+}
+
+#dgwrap-header nav>.header_depth2 .depth2_wrap>ul {
+	float: left;
+	/* margin: 30px 0px 40px 0px; */
+	-webkit-text-stroke-width: medium;
+}
+
+#dgwrap-header nav>.header_depth2 .depth2_wrap>ul.depth2_menu1 {
+	margin: 0px;
+	padding-left: 7%;
+	width: 19%;
+}
+
+#dgwrap-header nav>.header_depth2 .depth2_wrap>ul.depth2_menu2 {
+	margin: 0px;
+	padding-left: 8%;
+	width: 19%;
+}
+
+#dgwrap-header nav>.header_depth2 .depth2_wrap>ul.depth2_menu3 {
+	margin: 0px;
+	padding-left: 9%;
+	width: 20%;
+}
+
+#dgwrap-header nav>.header_depth2 .depth2_wrap>ul.depth2_menu4 {
+	margin: 0px;
+	padding-left: 9%;
+	width: 20%;
+}
+
+#dgwrap-header nav>.header_depth2 .depth2_wrap>ul.depth2_menu5 {
+	margin: 0px;
+	padding-left: 9%;
+	width: 20%;
+}
+
+#dgwrap-header nav>.header_depth2 .depth2_wrap>ul.depth2_menu6 {
+	margin: 0px;
+	padding-left: 9%;
+	width: 15%;
+}
+
+#dgwrap-header nav>.header_depth2 .depth2_wrap>ul>li {
+	margin-top: 15px;
+}
+
+#dgwrap-header nav>.header_depth2 .depth2_wrap>ul>li a {
+	font-size: 17px;
+	letter-spacing: -1px;
+}
+
+#dgwrap-header nav>.header_depth2 .depth2_wrap>ul>li a:hover {
+	color: #2c3e50;
+	font-weight: bold;
+}
+
+#dgwrap-header nav>.header_depth2 .depth2_wrap>ul>li a.selected {
+	color: #1ab9c9;
+	font-weight: bold;
+}
+
+#dgwrap-header nav>.header_depth2 .depth2_wrap>ul>li a .menu_new {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin-top: 2px;
+	text-indent: -9999px;
+	vertical-align: top;
+	overflow: hidden;
+	background-position: 0px -134px;
+}
+ul, li {
+	list-style: none;
+}
+
+/* 리스트 출력과 연관된 css */
+#dgwrap-content .content_middle.list .middle_wrap .table tr>td a span.flag,
+	#dgwrap-content .content_middle.list .middle_wrap .table tr>td.flag:before,
+	#dgwrap-content .content_middle h2 {
+	display: block;
+	color: #666;
+	font-weight: bold;
+	overflow: hidden;
+}
+/* 공지사항에서 게시판  CSS 테이블 형태임*/
+#dgwrap-content .content_middle .suggest_feedback_btn:after,
+	#dgwrap-content .content_middle.class.view .middle_classinfo .classinfo_middle>ul>li .middle_togglebtn span.onoff_btn,
+	#dgwrap-content .content_middle .middle_suggest_filter ul>li .suggest_like:before,
+	#dgwrap-content .content_middle .middle_suggest_filter ul>li .num,
+	#dgwrap-content .content_middle.list.type2 .middle_brain_filter .reset_btn,
+	#dgwrap-content .content_middle.list.type2 .middle_brain_filter>ul>li button,
+	#dgwrap-content .content_middle.tosdev.list .middle_wrap>.middle_list>li dl dd .list_contenttop>.contenttop_left p>span.flag,
+	#dgwrap-content .content_notice ul li>a p span.flag, #dgwrap-content .content_notice ul li.notice_new:before,
+	#dgwrap-content .content_notice>h3 a:after, #dgwrap-content .content_middle.info .middle_info .info_videowrap .info_videoslide ul li:after,
+	#dgwrap-content .content_middle.info .middle_info .slide_scroll ul li button:before,
+	#dgwrap-content .content_middle.info .middle_info .slide_scrollcontroller p,
+	#dgwrap-content .content_middle.info .middle_info .slide_btnwrap .slide_btn button:before,
+	#dgwrap-content .content_middle .middle_left .left_content dd .rank_tree li:after,
+	#dgwrap-content .content_middle.view.item .middle_wrap>h3.item:before,
+	#dgwrap-content .content_middle.item .middle_wrap table td .img_null:before,
+	#dgwrap-content .content_middle.item .middle_wrap table td p.item,
+	#dgwrap-content .content_middle.item .middle_wrap table th .item_layer strong:before,
+	#dgwrap-content .content_middle.item .middle_wrap table th button,
+	#dgwrap-content .content_middle.write .middle_editor .editor_rank>li:after,
+	#dgwrap-content .content_middle.media.list .middle_wrap>.middle_list>li dl dt .list_overlayer dt span.flag,
+	#dgwrap-content .content_middle.media.list .middle_wrap>.middle_tab li.tab_ost a:before,
+	#dgwrap-content .content_middle.list.type2 h2>a:before, #dgwrap-content .content_middle.list.type2 h2>a:after,
+	#dgwrap-content .content_middle.list .middle_wrap .table tr>td a span.flag,
+	#dgwrap-content .content_middle.list .middle_wrap .table tr>td.flag:before,
+	#dgwrap-content .content_middle .top_link>li a:after, #dgwrap-content .content_middle .middle_left .left_bottom .bottom_replylist li dl dd p>a:last-child:after,
+	#dgwrap-content .content_middle .middle_left .left_content dd .content_modify li a.modify_accusation:before,
+	#dgwrap-content .content_middle .middle_left .left_content dt h3 span.textindent,
+	#dgwrap-content .content_middle .middle_left .left_content dt p.left_auth,
+	#dgwrap-content .content_bigslide .bigslide_btn.transition button,
+	#dgwrap-content .content_bigslide .bigslide_btn button {
+	display: block;
+}
+
+table, tr, th, td {
+	border-collapse: separate;
+	border-spacing: 0px;
+}
+
+.table {
+	position: relative;
+	margin: 0px auto;
+	border-top: 2px #666 solid;
+}
+
+.table th {
+	position: relative;
+	padding: 14px 10px;
+	border-bottom: 1px #efefef solid;
+	text-align: center;
+	background-color: #fbfbfb;
+}
+
+.table td {
+	position: relative;
+	padding: 14px 10px;
+	border-bottom: 1px #efefef solid;
+	text-align: center;
+	word-break: break-word;
+	background-color: #fff;
+}
+
+.txtLeft {
+	text-align: left !important;
+}
+
+/* 공지사항의 제목줄 글자 숨기기 */
+.hidden_acc, .hidden_acc * {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	margin: 0px !important;
+	padding: 0px !important;
+	border: 0px !important;
+	font-size: 0rem !important;
+	overflow: hidden !important;
+	background-color: transparent !important;
+}
+/* 라인??? */
+.oneline {
+	display: block;
+	width: 100%;
+	height: 19px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-wrap: normal;
+	word-break: break-word;
+	overflow: hidden;
+}
+/* 중요 글씨 없어지게 하는 거 */
+.textindent {
+	text-indent: -9999px !important;
+	overflow: hidden !important;
+}
+
+/* 메뉴바의  컨테이너 레이아웃 설정 */
+.menu_container {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+
+
+
+
+
+/*----------------------------- 페이지 찾는 영역 -------------------------------- */
+#dgwrap-content .content_middle.list .middle_wrap .middle_search {
+	position: relative;
+	width: 100%;
+	margin-top: 25px;
+	text-align: center;
+	overflow: hidden;
+	padding-bottom: 25px;
+}
+
+#dgwrap-content .content_middle.list .middle_wrap .middle_search select
+	{
+	display: inline-block;
+	min-width: 120px;
+}
+
+#dgwrap-content .content_middle.list .middle_wrap .middle_search input {
+	width: 25%;
+	margin: 0px 10px;
+	padding: 3px;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom: 2px solid;
+}
+
+#dgwrap-content .content_middle.list .middle_wrap .middle_search input.btn
+	{
+	width: 10%;
+	border: 2px solid;
+	border-color: #353b48;
+}
+/* ----------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+/* 페이지네이션 관련 css */
+/* 공간 넣기 */
+#dgwrap-content .content_middle .middle_btn {
+	position: relative;
+	width: 100%;
+	height: 45px;
+	margin: 20px 0px 10px 0px;
+	overflow: hidden;
+}
+/* 가운에 정렬 */
+.paging {
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+}
+/* 버튼 관련  CSS*/
+.paging a, .paging span {
+	display: inline-block;
+	padding: 0px 15px;
+	color: #353b48;
+}
+
+/* 셀렉트 박스 디자인 */
+select {
+	width: 15%;
+	height: 40px;
+	padding: 0 0 0 10px;
+	font-family: inherit;
+	background:
+		url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+		no-repeat 95% 50%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: 1px solid #999;
+	border-radius: 0px;
+}
+
+select::-ms-expand { /* for IE 11 */
+	display: none;
+}
+
+/* 공지쪽 테이블 */
+table.blueTable {
+	width: 100%;
+	text-align: left;
+	border-collapse: collapse;
+}
+
+table.blueTable td, table.blueTable th {
+	border: 0px solid #AAAAAA;
+	padding: 5px 5px;
+}
+
+table.blueTable tbody {
+	border-bottom: 2px solid #44444;
+}
+
+table.blueTable tbody td {
+	font-size: 13px;
+	color: #333333;
+	border-bottom: 2px solid #C6B3B7;
+}
+
+table.blueTable thead {
+	background: #C6B3B7;
+	border-bottom: 2px solid #444444;
+	border-top: 2px solid #444444;
+}
+
+table.blueTable thead th {
+	font-size: 17px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+
+table.blueTable tfoot td {
+	font-size: 14px;
+}
+
+table.blueTable tfoot .links {
+	text-align: right;
+}
+
+table.blueTable tfoot .links a {
+	display: inline-block;
+	background: #1C6EA4;
+	color: #FFFFFF;
+	padding: 2px 8px;
+	border-radius: 5px;
+}
+
+
+
+
+
+div.viewTable {
+  border: 2px solid #AAA396;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+.divTable.viewTable .divTableCell, .divTable.viewTable .divTableHead {
+  border: 0px solid #AAAAAA;
+  padding: 3px 6px;
+}
+.divTable.viewTable .divTableBody .divTableCell {
+  font-size: 13px;
+}
+.divTable.viewTable .divTableHeading {
+    border-bottom: 2px solid #AAA396;
+}
+.divTable.viewTable .divTableHeading .divTableHead {
+  font-size: 15px;
+  font-weight: bold;
+  border-left: 0px solid #D0E4F5;
+  display: inline-block;
+}
+.divTable.viewTable .divTableHeading .divTableHead:first-child {
+  border-left: none;
+}
+
+.viewTable .tableFootStyle {
+  font-size: 14px;
+}
+.viewTable .tableFootStyle .links {
+	 text-align: right;
+}
+.viewTable .tableFootStyle .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.viewTable.outerTableFooter {
+  border-top: none;
+}
+.viewTable.outerTableFooter .tableFootStyle {
+  padding: 3px 5px; 
+}
+/* DivTable.com */
+.divTable{ display: table; }
+.divTableRow { }
+.divTableHeading {}
+.divTableCell, .divTableHead { display: table-cell;}
+.divTableHeading { }
+.divTableBody { }
+
+#daetguel{
+	border-top : 2px solid #AAA396;
+	background : #f7f1e3;
+	padding : 20px;
+}

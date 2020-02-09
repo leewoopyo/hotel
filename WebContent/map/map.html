@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <!-- aos : animate on scroll : 스크롤 이펙트  -->
+    <link rel="stylesheet" href="../css/aos.css">
+    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../css/jquery.timepicker.css">
+    <!-- 이미지 및 동영상 등을 게시할 때 더 이쁘게 보여줌 -->
+    <link rel="stylesheet" href="../css/fancybox.min.css">
+   
+    <link rel="stylesheet" href="../fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../fonts/fontawesome/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:500&display=swap&subset=korean" rel="stylesheet">
+	
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/mycss.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+
+	<section class="section " id="dgwrap-content" data-aos="fade-up"
+		style="padding: 0px;">
+		<div class="container" data-aos="fade-up">
+			<div class="row justify-content-center text-center mb-5">
+				<div class="col-md-7">
+					<h2 class="heading">MAP</h2>
+					<p>호텔 위치</p>
+				</div>
+			</div>
+			<div style="height: 600px; width: 100%;">
+				<div id="map" style="height: 100%; width: 100%;"></div>
+			</div>
+			<div>
+			<p><h2 class="blind">찾아 오시는 길</h2></p>
+			<p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Location</span></p>
+				<p>369W+JM Phước Mỹ, Sơn Trà, Đà Nẵng, Việt Nam, Phường Phước Mỹ, Quận Sơn Trà, Đà Nẵng, 베트남 </p>
+			</div>
+			
+		</div>
+	</section>
+
+
+
+	<script>
+		function initMap() {
+			// The location of Uluru
+			var uluru = {
+				lat : 16.0639,
+				lng : 108.2467
+			};
+			// The map, centered at Uluru
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom : 12,
+				center : uluru
+			});
+			// The marker, positioned at Uluru
+			var marker = new google.maps.Marker({
+				position : uluru,
+				map : map
+			});
+		}
+	</script>
+    
+    
+<!-- script모음  -->
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <!-- migrate : 제이쿼리 1.9이상 버전에서 하위버전과 호환이 잘 안될때 사용   -->
+    <script src="../js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/jquery.stellar.min.js"></script>
+    <!-- 이미지 및 동영상 등을 게시할 때 더 이쁘게 보여줌 -->
+    <script src="../js/jquery.fancybox.min.js"></script>
+    <!-- aos = animate on scroll  -->
+    <script src="../js/aos.js"></script>
+    <script src="../js/bootstrap-datepicker.js"></script> 
+    <script src="../js/jquery.timepicker.min.js"></script> 
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrhOfCmrnYEoWqYnhiVIyj5gaIO2ZhTb4&callback=initMap"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

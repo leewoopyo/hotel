@@ -1,0 +1,80 @@
+
+/* 캡션 부분  */
+legend,caption{position:absolute;  left:-99999px;  display:block;  width:1px;  height:1px;  overflow:hidden;text-indent:-99999px;clip:rect(0,0,0,0);display: block;}
+
+
+/* 반응형 테이블 */
+.tb-responsive{border-top:1px solid #aaa;}
+.tb-responsive table {width:100%;border-collapse:collapse;border-spacing:0;box-sizing:border-box;}
+.tb-responsive th,.tb-responsive td{padding:30px 30px; border-bottom:1px solid #eee; font-size:16px; vertical-align:middle;color:#666}
+.tb-responsive td {color:#333}
+.tb-responsive th {background-color:#fbfbfb; text-align:left}
+@media all and (max-width:768px){ 
+	.tb-responsive td,.tb-responsive th {padding:.9rem 1rem; border-bottom:0; font-size:1.4rem; background:none}
+	.tb-responsive .rwd-table,
+	.tb-responsive .rwd-table thead,
+	.tb-responsive .rwd-table tbody,
+	.tb-responsive .rwd-table tr,
+	.tb-responsive .rwd-table th,
+	.tb-responsive .rwd-table td {display:block}/* 테이블의 모든 요소를 block화 시킴*/
+	.tb-responsive{border-top:1px solid #666;}
+	.tb-responsive .rwd-table thead tr {position:absolute;left:-9999px;top:-9999px}/* thead의 tr을 화면밖으로 날림 */
+	.tb-responsive .rwd-table tr:after {content:"";display:block;clear:both}/* th,td의 플롯해제 */
+	.tb-responsive .rwd-table td {position:relative; float:left; width:100%; padding:.9rem 1rem; box-sizing:border-box; border-bottom:0; font-size:1.3rem;}/* td내용 우측에 타이틀 들어갈 영역 만듬 */
+	.tb-responsive .rwd-table td .title{display:inline-block; vertical-align:top; width:40%; max-width:40%; padding-right:1rem; word-break: keep-all; word-wrap: break-word;}
+	.tb-responsive .rwd-table td .td-txt{display:inline-block; vertical-align:top; width:58% }
+	.tb-responsive.list-type tr td:first-child{padding-top:1.9rem;}
+	.tb-responsive.list-type tr td:last-child{padding-bottom:1.9rem; border-bottom:1px solid #ddd;}
+	.tb-responsive.view-type .rwd-table tbody th{position:absolute;left:-9999px;top:-9999px}
+	.tb-responsive.view-type{padding:1.1rem 0; border-bottom:1px solid #ddd;}
+}
+
+.blind{
+	padding: 10px 0;
+}
+
+/* -제공 서비스- */
+/* 제목부분  */
+.title-sub-area .sub-title {
+   padding:10px 0;
+}
+/* 옆으로 놓기 */
+.grid-area .colum{float:left;word-break:break-word;}
+/* 가로길이 조절 */
+.colum.col-3 {
+    width: 25%;
+}
+.grid-area.gap-4 {
+    width: auto;
+    margin-left: -30px;
+    margin-right: -30px;
+}
+.grid-area.gap-4 .colum {
+    padding: 0 30px;
+}
+
+/* 폰트 설정  */
+.amenity-list li {
+	width:100%;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: -1px;
+    list-style: none;
+}
+/* 그림파일 가져오기 */
+
+/* 제공서비스 */
+.amenity-list{margin-top:20px; overflow: hidden;}
+.amenity-list li{font-size:15px; line-height:1.6;}
+.amenity-list li > .ico-amen{display:block; width:102px; height:102px; background-size:310px 310px; background-position:0 0;}
+.amenity-list li > .ico-amen.list-01{background:url("../rooms/bed.jpg") no-repeat; }
+.amenity-list li > .ico-amen.list-02{background:url("../rooms/shower.jpg") no-repeat; }
+.amenity-list li > .ico-amen.list-03{background:url("../rooms/dish.jpg") no-repeat; }
+.amenity-list li > .ico-amen.list-04{background:url("../rooms/microwave.jpg") no-repeat; }
+.amenity-list li > .desc .tit{font-size: 18px;color: #333;}
+.amenity-list li > .desc .tit + p{margin-top: 5px;}
+.amenity-list li p{word-break: keep-all;}
+
+
+
+

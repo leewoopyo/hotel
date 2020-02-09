@@ -1,0 +1,75 @@
+/* 날짜 넣는 div의 설정 */
+.input_date{
+	width:40%;
+	border: 3px solid;
+    border-radius: 8px;
+}
+/* div안에 있는 input태그 스타일 지정 */
+.input_date input{
+
+	border: none;
+	border-radius: inherit;
+
+}
+/* div안에 있는 select 클래스만 스타일 지정 */
+.input_date .select{
+	width: 100%;
+	height:50px;
+	border: none;
+	border-radius: inherit;
+	margin-left: 5px;
+	font-size: 25px;
+}
+
+
+
+
+
+
+/* ------------------- 예약 현황 나타내기 ----------------------- */
+
+/* 모든 테이블 스타일 설정 */
+
+table{
+	border-top:1px solid;
+	border-bottom:1px solid;
+	border-collapse: collapse;
+	
+	
+}
+th{
+	    border: none;
+    background-color: #ced6e0;
+    width: 10%;
+    height: 50px;
+}
+
+td{
+	border-top :1px dotted #bdc3c7;
+	padding-bottom:0px;
+}
+td div a{
+text-decoration: none;
+    border: 1px solid #c0392b;
+    font-size: larger;
+    color: inherit;
+    display: table-cell;
+    padding: 5px;
+
+}
+td div{
+	margin-top:10%;
+	margin-bottom:10%;
+}
+thead{
+	font-size: 20px;
+    font-family: sans-serif;
+}
+.type div{
+	margin-bottom: 20%;
+    font-size: larger;
+    font-weight: bold;
+    margin-top: 20%;
+
+}
+
