@@ -11,13 +11,11 @@
 <%
 //세션 삭제
 session.invalidate();
-//out.print("로그아웃");
-
-
-response.sendRedirect("../index.jsp");
 %>
-<!-- 돌아가기 버튼 생성 -->
-<input type="button" value="이전페이지" onclick="location.href='../index.jsp'">
+<!-- 세션 종료 후 뒤페이지로 돌아감 -->
+<script>
+	history.back();
+</script>
 
 </body>
 </html>

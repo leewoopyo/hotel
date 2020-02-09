@@ -1,32 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="hotel.*, java.text.SimpleDateFormat, java.util.*"%>
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+  <head>
+    <meta charset="utf-8">
+    <title>JOA HOTEL</title>
 
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<!--부트스트랩 CSS 가져오기 -->
-<link rel="stylesheet" href="../css/animate.css">
-<!-- animate -->
-<link rel="stylesheet" href="../css/owl.carousel.min.css">
-<link rel="stylesheet" href="../css/aos.css">
-<link rel="stylesheet" href="../css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="../css/jquery.timepicker.css">
-<link rel="stylesheet" href="../css/fancybox.min.css">
-<link rel="stylesheet" href="../fonts/ionicons/css/ionicons.min.css">
-<link rel="stylesheet"
-	href="../fonts/fontawesome/css/font-awesome.min.css">
+<!-- CSS 파일 링크 모음 -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css"> <!--부트스트랩 CSS 가져오기 -->
+    <link rel="stylesheet" href="../css/animate.css"> <!-- animate -->
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/aos.css">
+    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../css/jquery.timepicker.css">
+    <link rel="stylesheet" href="../css/fancybox.min.css">
+    <link rel="stylesheet" href="../fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../fonts/fontawesome/css/font-awesome.min.css">
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/mycss.css">
+    <link rel="stylesheet" href="Reservation.css">
+  </head>
+  <body>
+  
+<!-- 예약 페이지 들어올 땐 로그인을 해야만 들어올 수 있도록 한다. -->
 
-<link rel="stylesheet" href="Reservation.css">
-<link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
+<%
+String loginOK = null;		//loginOK변수 생성(로그인 상태를 나타냄)
+String jumpURL = "../login/login.jsp?jump=../Reservation/Reservation.jsp";	//jumpURL로 이동할 URL 설정(login.jsp로 가고 jump라는 파라메터 값을 보낸다.)
+loginOK = (String)session.getAttribute("login_ok");	//login_ok라는 세션값을 가져옴(로그인이 되었다면 yes값이 들어온다)
+if(loginOK == null){
+	response.sendRedirect(jumpURL); //loginOK가 null값이면 위에 설정한 URL로 이동
+	return;
+}
+if(!loginOK.equals("yes")){
+	response.sendRedirect(jumpURL); //loginOK가 yes가 아니라도  위에 설정한 URL로 이동
+	return;
+}
+%>  
+
+<!-- ****************************헤더 시작*****************************  -->
+<!-- 상당의 흰색 바를 나타내는 부분 -->
+	<header class="site-header js-site-header">
+	<!-- 반응형 설정을 위해  container 쿨래스를 가져옴 -->
+      <div class="container-fluid">
+        <div class="row align-items-center">
+        <!-- 제목 나타내는 영역 -->
+          <div class="col-12 col-lg-12 site-logo" data-aos="fade"><a href="../index.jsp">JOA HOTEL</a>
+          <!-- 만약 sessio영역에서 login_id객체의 값이 admin이면 (admin을 관리자 계정으로 설정 했다면)관리자 페이지가 뜨는 링크가 생긴다.  -->
+          
+          <%if(session.getAttribute("login_id").equals("admin")){ %>
+          	<a href="../admin/adm_main.html" style="left: 60%; position: sticky;">관리자 페이지</a>       
+          <%} %>
+          
+          <!-- 만약 session에서 login_ok객체의 값이 yes이면(즉, 로그인 상태 이면 ), 로그아웃 창이 뜨게 한다.  -->
+          <%if(session.getAttribute("login_ok").equals("yes")){ %>
+          	<a href="../login/logout.jsp" style="left: 90%; position: sticky;">LOG OUT</a></div>         
+          <%} %>
+        </div>
+      </div>
+    </header>
+<!-- ****************************헤더 끝*****************************  -->
+<!-- ****************************헤더 밑 배너 부분 *****************************  -->
+    <section class="inner-page bg-image overlay" style="height:300px; min-height: 300px; background-image: url(../banner/banner1.jpg); background-size: cover;" data-stellar-background-ratio="0.5">
+      <div class="container" style="height:300px;">
+        <div class="row site-hero-inner justify-content-center align-items-center" style="height:300px;">
+          <div class="col-md-10 text-center" style="top:50px;" data-aos="fade">
+            <h1 class="heading mb-3">Reservation</h1>
+            <ul class="custom-breadcrumbs mb-4">
+              <li><a href="../index.jsp" style="font-size:20px;">Main</a></li>
+              <li>&bullet;</li>
+              <li>Reservation</li>
+            </ul>
+          </div>
+        </div>
+      </div>  
+    </section>
+<!-- ****************************배너 끝*****************************  -->
 
 
-
+<!-------------------------------------------------------------------본문 ---------------------------------------------------------------------------->
 <%
 request.setCharacterEncoding("UTF-8");
 //Reservation_status에서 넘겨준 값들을 받는다.
@@ -40,12 +94,18 @@ String datestr = Integer.toString(year) + "-" + Integer.toString(month) + "-" + 
 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd");
 Date Date = formatter.parse(datestr);
 long caldate = (Date.getTime() / (24 * 60 * 60 * 1000));
+
+
+hotelDAO hoteldao = hotelDAO.getInstance();
+
+UserDTO userdto = hoteldao.get_user_info((String)session.getAttribute("login_id"));
+
 %>
 
+<section class="section " id="dgwrap-content" style="margin: 3% 10% 3% 10%;">
 
 
-	<form id="resv" action="test.jsp" method="post">
-		<section class="section" style="display: inline-grid;">
+<form id="resv" action="Reservation_logic.jsp" method="post">
 			<h2>예약 하기</h2>
 			<div class="container" style="margin: 0px;">
 				<div class="row" style="">
@@ -128,7 +188,7 @@ long caldate = (Date.getTime() / (24 * 60 * 60 * 1000));
 					<div class="col-4">
 						<h3>이름</h3>
 						<div class="input_date" style="display: flex; min-width: 300px;">
-							<input id="name" class="select" type="text" name="name" value=""
+							<input id="name" class="select" type="text" name="name" value="<%=userdto.getId() %>"
 								maxlength="8" />
 							<ion-icon name="contact"
 								style="width:50px; height:50px; left: 10%;"></ion-icon>
@@ -138,7 +198,7 @@ long caldate = (Date.getTime() / (24 * 60 * 60 * 1000));
 						<h3>전화번호</h3>
 						<div class="input_date" style="display: flex; min-width: 300px;">
 							<input type="text" oninput="inputPhoneNumber(this);" id="call"
-								class="select" name="call" value="" maxlength="13">
+								class="select" name="call" value="<%=userdto.getTell() %>" maxlength="13">
 							<ion-icon name="call" style="width:50px; height:50px; left: 10%;"></ion-icon>
 						</div>
 					</div>
@@ -148,33 +208,85 @@ long caldate = (Date.getTime() / (24 * 60 * 60 * 1000));
 							style="width: 100px; height: 40px;">
 					</div>
 				</div>
-		</section>
+				</div>
 	</form>
 
 
 
 
+</section>
+<!-------------------------------------------------------------------본문 ---------------------------------------------------------------------------->
 
 
 
-	<!-- 스크립트 소스 모음  -->
-	<script src="../js/jquery-3.3.1.min.js"></script>
-	<script src="../js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="../js/popper.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/owl.carousel.min.js"></script>
-	<script src="../js/jquery.stellar.min.js"></script>
-	<script src="../js/jquery.fancybox.min.js"></script>
-	<script src="../js/aos.js"></script>
-	<script src="../js/bootstrap-datepicker.js"></script>
-	<script src="../js/jquery.timepicker.min.js"></script>
-	<!-- 이쁜 아이콘 사용하게 하는 script -->
-	<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-	<!-- 예약 페이지 개별 설정 스크립트 -->
 
-	<script src="Reservation.js"></script>
-	<script src="../js/main.js"></script>
-	
+<!---------------------------------------------- 하단 배너 부분 ----------------------------------------------------------->
+	<section class="section bg-image overlay" style="background-image: url('../images/hero_4.jpg');">
+        <div class="container" >
+          <div class="row align-items-center">
+            <div class="col-12 col-md-6 text-center mb-4 mb-md-0 text-md-left" data-aos="fade-up">
+              <h2 class="text-white font-weight-bold">A Best Place To Stay. Reserve Now!</h2>
+            </div>
+            <div class="col-12 col-md-6 text-center text-md-right" data-aos="fade-up" data-aos-delay="200">
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+    <footer class="section footer-section">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-md-3 mb-5 pr-md-5 contact-info">
+            <!-- <li>198 West 21th Street, <br> Suite 721 New York NY 10016</li> -->
+                     <p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Address</span> <span> 369W+JM Phước Mỹ, Sơn Trà, Đà Nẵng, Việt Nam, Phường Phước Mỹ, Quận Sơn Trà, Đà Nẵng, 베트남 <br></span></p>
+            <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Phone</span> <span> (+1) 435 3533</span></p>
+            <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email</span> <span> KOPO15@kopoctc.com</span></p>
+          </div>
+          <div class="col-md-3 mb-5">
+            <p>Sign up for our newsletter</p>
+            <form action="#" class="footer-newsletter">
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email...">
+                <button type="submit" class="btn"><span class="fa fa-paper-plane"></span></button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row pt-5">
+          <p class="col-md-6 text-left">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </p>
+            
+          <p class="col-md-6 text-right social">
+            <a href="#"><span class="fa fa-tripadvisor"></span></a>
+            <a href="#"><span class="fa fa-facebook"></span></a>
+            <a href="#"><span class="fa fa-twitter"></span></a>
+            <a href="#"><span class="fa fa-linkedin"></span></a>
+            <a href="#"><span class="fa fa-vimeo"></span></a>
+          </p>
+        </div>
+      </div>
+    </footer>
+<!---------------------------------------------- 하단 배너 부분 종료 ----------------------------------------------------------->    
+
+
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/jquery.stellar.min.js"></script>
+    <script src="../js/jquery.fancybox.min.js"></script>
+    <script src="../js/aos.js"></script>
+    <script src="../js/bootstrap-datepicker.js"></script> 
+    <script src="../js/jquery.timepicker.min.js"></script> 
+    
+    <script src="../js/main.js"></script>
+<!-- 스크립트 작성  -->
 <script>
 //전 페이지에서 내가 선택 했던 방이 선택된 채로 로드되는 function
 window.onload=function(){
@@ -209,16 +321,20 @@ $('#bnt').click(function(){
 
 
 	//if문으로  위에서 자른 것 중 달 부분을 확인한다.
-	if(checkinmonth == checkoutmonth){
+	if(parseInt(checkinmonth) == parseInt(checkoutmonth)){
 		//달이 같으면 날짜를 확인해서 체크 인보다 체크 아웃 날이 더 크면 alert이 뜨도록 한다.
-		if(checkinday >= checkoutday){
+		if(parseInt(checkinday) >= parseInt(checkoutday)){
+			console.log(checkinday);
+			console.log(checkoutday);
+			console.log("1111");
 			alert("날짜 선택 입력 오류");
 			return;
 		}
 		//달이 아얘 다르면 서밋한다.
-	}else if(checkinmonth < checkoutmonth){
+	}else if(parseInt(checkinmonth) < parseInt(checkoutmonth)){
 		
 	}else{
+		console.log("2222");
 		alert("날짜 선택 입력 오류");
 		return;
 	}
@@ -286,6 +402,5 @@ function inputPhoneNumber(obj) {
 }
 
 </script>
-
 </body>
 </html>

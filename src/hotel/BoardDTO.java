@@ -1,17 +1,64 @@
 package hotel;
 
-public class BoardDTO {
+/*
+ * import lombok.*;
+ * 
+ * @Setter
+ * @Getter
+ * @Data
+ * @AllArgsConstructor
+ * public class BoardDTO{
+ * 
+ * 
+ * 	int id;		//게시물 번호
+	String title;	//제목
+	String content;		//내용
+	String date;		//작성일
+	String userid;	//작성자 아이디
+	int viewcnt;	//조회수
+	int totalrecnt;		//댓글 수
 	
-	int id;
-	String title;
-	String date;
-	String content;
+	
 	int rootid;
 	int relevel;
 	int recnt;
-	int viewcnt;
 	int isdelete;
 	
+ * 
+ * }
+ * 
+ * */
+
+
+public class BoardDTO {
+	
+	int id;		//게시물 번호
+	String title;	//제목
+	String content;		//내용
+	String date;		//작성일
+	String userid;	//작성자 아이디
+	int viewcnt;	//조회수
+	int totalrecnt;		//댓글 수
+	
+	int rootid;
+	int relevel;
+	int recnt;
+	int isdelete;
+	
+	
+	
+	
+	public BoardDTO(int id, String title, String content, String userid, String date, int viewcnt, int totalrecnt) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.userid = userid;
+		this.date = date;
+		this.viewcnt = viewcnt;
+		this.totalrecnt = totalrecnt;
+	}
+
 	public BoardDTO(int id, String title, String date, String content, int rootid, int relevel, int recnt, int viewcnt,int isdelete) {
 		super();
 		this.id = id;
@@ -95,6 +142,22 @@ public class BoardDTO {
 
 	public void setIsdelete(int isdelete) {
 		this.isdelete = isdelete;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public int getTotalrecnt() {
+		return totalrecnt;
+	}
+
+	public void setTotalrecnt(int totalrecnt) {
+		this.totalrecnt = totalrecnt;
 	}
 	
 	

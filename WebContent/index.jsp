@@ -28,17 +28,39 @@
     <!-- 개인 설정 -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mycss.css">
+    
+    <!-- 미디어 쿼리 사용하여 모바일 환경 구성  -->
+    <style>
+    @media ( max-width : 991.98px){
+    	body{
+    		font-size:30px;
+    	}
+    	.heading{
+    		font-size:50px;
+    	}
+    	.btn{
+    		font-size:50px;
+    	}
+    	.site-hero-inner .heading {
+    		font-size: 80px;
+    	}
+    	.custom-caption{
+    		font-size:30px;
+    	}
+    	#introduction{
+    		text-align: center;
+    	}
+    }
+    </style>
+    
+    
   </head>
   <body>
   
 <%
 String message = null;		//출력할 메시지를 담는 변수
 Cookie[] cookies = request.getCookies();	//먼저 response객체에 저장되있는 쿠키를 먼저 가져와서 배열에 담는다.
-if(cookies.length == 1){		//그 배열 길이가 1이면 현제 담겨있는 쿠키가 없다는 뜻이다. 
-	message = "첫방문 입니다.";		//그래서 해당 문구 변수에 삽입
-//	out.print(message);			
-}else{							//배열에 쿠키가 저장이 되어 있으면 길이가 1보다 크다.
-//	out.print("마지막 접속 시간 : ");
+try{
 	for(int i = 0;i < cookies.length;i++){	//반복을 돌려서 저장된 쿠키를 가져온다
 		Cookie thisCookie = cookies[i];		//thiscookie에 데이터를 담고
 	 	//out.print("길이 : "+cookies.length);		
@@ -47,33 +69,31 @@ if(cookies.length == 1){		//그 배열 길이가 1이면 현제 담겨있는 쿠
 		if("time".equals(thisCookie.getName())){	//저장했던 쿠키데이터의 이름이 time인것을 찾아서 
 			//저장된 값을 메시지 변수에 담아서 출력하게 한다. 출력 인코딩 된 데이터를 디코딩 해서 저장한다.
 			message = URLDecoder.decode(thisCookie.getValue(), "UTF-8");		
-//			out.print(message+"<br>");
 			thisCookie.setMaxAge(0);				//그리고 쿠키를 지우고 
 			response.addCookie(thisCookie);			//상태를 저장한다.
 		}
-	}
+	}	
+}catch(Exception e){
+	
 }
 %>
 <%
 SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");	//현제 시간 포맷 설정(띄어쓰기가 안됨)
 Date time = new Date();	//현제 시간 가져오기
 String daystr = format.format(time);	//날짜 포맷에 맞게 날짜 데이터 저장 
-//out.print(daystr);
-//out.print(timestr);
 //쿠키를 저장한다.(해당 데이터 이름은 time, 값은 daystr이다.) 그리고 값을 저장할 때 UTF-8로 인코딩하여 값을 저장한다.(한글문제 일어날 시에는)
 Cookie cookieName = new Cookie("time",URLEncoder.encode(daystr, "UTF-8"));	
-cookieName.setMaxAge(-1);	//해당 데이터는 브라우저가 켜져있는 동안 적용되게 한다.
+cookieName.setMaxAge(60*60*24);	//해당 데이터는 브라우저가 켜져있는 동안 적용되게 한다.괄호 안에 쿠키의 만료일 을 설정할 수 있다.
 response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한다.
 %>
-
 <script>
-<%if(cookies.length == 1){%>
-	alert(<%=message%>);
+<%if(message == null){%>
+	alert("오늘 첫방문 입니다.");
 <%}else{%>
 	alert('마지막 방문 시간은  : ' + '<%=message%>' + ' 입니다.');
 <%}%>
 </script>
-  
+
   
   
     <!-------------------------------------------- 헤더 부분 시작 ---------------------------------------------->
@@ -81,14 +101,14 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
       <div class="container-fluid">
         <div class="row align-items-center">
         <!-- 로고 표시하는 부분 -->
-          <div class="col-6 col-lg-4 site-logo" data-aos="fade"><a href="index.jsp">JOA HOTEL</a></div>
+          <div class="col-6 col-lg-4 site-logo" data-aos="fade"><a href="index.jsp" id="logo">JOA HOTEL</a></div>
           <div class="col-6 col-lg-8">
 		<!--------메뉴바 부분  화면이 작아지면 보인다.----------->
-       <div id="asdf" class="site-menu-toggle js-site-menu-toggle" data-aos="fade">
+<!--        <div id="asdf" class="site-menu-toggle js-site-menu-toggle" data-aos="fade">
               <span></span>
               <span></span>
               <span></span>
-            </div>
+            </div> -->
             
             <!-- 화면이 클 때 보이는 메뉴 바  -->
              <div class="nav navbar-nav nav-links">
@@ -103,24 +123,25 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
            <!-- 메뉴바 끝 -->
 
 			<!-- 네이게이션 바  -->
-            <div class="site-navbar js-site-navbar" style="display:none">
+          <!--   <div class="site-navbar js-site-navbar" style="display:none">
               <nav role="navigation">
                 <div class="container">
                   <div class="row full-height align-items-center">
                     <div class="col-md-6 mx-auto">
                       <ul class="list-unstyled menu">
-                        <li class="active"><a href="index.jsp">Home</a></li>
-                        <li><a href="rooms.html">Rooms</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="reservation.html">Reservation</a></li>
+                        <li class="active"><a class="movepage" href="#next1">Main</a></li>
+                        <li><a class="movepage" href="#next2">호텔소개</a></li>
+                        <li><a class="movepage" href="#next3">예약하기</a></li>
+                        <li><a class="movepage" href="#next4">객실사진</a></li>
+                        <li><a class="movepage" href="#next5">식사메뉴</a></li>
+                        <li><a class="movepage" href="#next6">프로모션</a></li>
+                        <li><a class="movepage" href="#next7">About Us</a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
               </nav>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -146,30 +167,6 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
     <section class="section bg-light pb-0" id="next2">
       <div class="container">
         <div class="row check-availabilty" >
-          <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
-            <form action="#">
-              <div class="row">
-                <div class="col-md-6 mb-6 mb-lg-0 col-lg-4">
-                  <label for="checkin_date" class="font-weight-bold text-black">Check In</label>
-                  <div class="field-icon-wrap">
-                    <div class="icon"><span class="icon-calendar"></span></div>
-                    <input type="text" id="checkin_date" class="form-control">
-                  </div>
-                </div>
-                <div class="col-md-6 mb-6 mb-lg-0 col-lg-4">
-                  <label for="checkout_date" class="font-weight-bold text-black">Check Out</label>
-                  <div class="field-icon-wrap">
-                    <div class="icon"><span class="icon-calendar"></span></div>
-                    <input type="text" id="checkout_date" class="form-control">
-                  </div>
-                </div>
-               
-                <div class="col-md-6 col-lg-3 align-self-end">
-                  <button class="btn btn-primary btn-block text-white">Check Availabilty</button>
-                </div>
-              </div>
-            </form>
-          </div>
         </div>
       </div>
     </section>
@@ -190,8 +187,10 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
 다낭에 병풍처럼 펼쳐진 미케비치를 상상해 보셨나요?
 그곳에 가면 이 세상에서 가장 아름다운 사랑과 가장 가치 있는 선물이 있고, 편안한 휴식이 있으며 가장
 눈부신 추억이 있습니다. 조아 호텔에서는 고객님 한 분, 한 분의 고귀한 삶을 아름답게 비춰 드리고자 합니다.</p>
-            <p><a href="https://youtu.be/FT0odx2LoyQ" class="btn btn-primary text-white py-2 mr-3" data-fancybox>See video</a>
-            <a href="Welcome.jsp" class="btn btn-primary text-white py-2 mr-3" >more...</a></p>
+            <p id="introduction">
+            <a href="https://youtu.be/FT0odx2LoyQ" class="btn btn-primary text-white py-2 mr-3" data-fancybox>See video</a>
+            <a href="Welcome.jsp" class="btn btn-primary text-white py-2 mr-3" >more...</a>
+            </p>
           </div>
         </div>
       </div>
@@ -211,7 +210,7 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
         </div>
         <div class="row">
           <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <a href="#" class="room">
+            <a class="room">
               <figure class="img-wrap">
                 <img src="images/img_1.jpg" alt="Free website template" class="img-fluid mb-3">
               </figure>
@@ -223,7 +222,7 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
           </div>
 
           <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <a href="#" class="room">
+            <a class="room">
               <figure class="img-wrap">
                 <img src="images/img_2.jpg" alt="Free website template" class="img-fluid mb-3">
               </figure>
@@ -235,7 +234,7 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
           </div>
 
           <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <a href="#" class="room">
+            <a class="room">
               <figure class="img-wrap">
                 <img src="images/img_3.jpg" alt="Free website template" class="img-fluid mb-3">
               </figure>
@@ -294,7 +293,7 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
     <section class="section bg-image overlay" id="next5" style="background-image: url('images/hero_3.jpg');">
       <div class="container">
         <div class="row justify-content-center text-center mb-5">
-          <div class="col-md-7">
+          <div class="col-md-9">
             <h2 class="heading text-white" data-aos="fade">Restaurant Menu</h2>
             <p class="text-white" data-aos="fade" data-aos-delay="100">
 호텔 최고층에 위치한 마레첼로는
@@ -326,34 +325,34 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
                 <div class="col-md-6">
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$15.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">까오러우(비빔쌀국수)</a></h3>
+                    <h3 class="text-white"><a class="text-white">까오러우(비빔쌀국수)</a></h3>
                     <p class="text-white text-opacity-7">돼지고기 볶음과 튀긴 쌀국수를 올린 면요리,매콤한 맛이 일품 </p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$15.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">껌까(닭고기덮밥)</a></h3>
+                    <h3 class="text-white"><a class="text-white">껌까(닭고기덮밥)</a></h3>
                     <p class="text-white text-opacity-7">숯불 닭고기와 각종 채소를 밥 위에 올려 먹는 베트남 대표요리</p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$18.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">껌헨(제첩비빔밥)</a></h3>
+                    <h3 class="text-white"><a class="text-white">껌헨(제첩비빔밥)</a></h3>
                     <p class="text-white text-opacity-7">제첩 조갯살과 견과류 등 각종 고명을 밥위에 얹은 요리</p>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$30.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">껀가느엉(닭날개구이)</a></h3>
+                    <h3 class="text-white"><a class="text-white">껀가느엉(닭날개구이)</a></h3>
                     <p class="text-white text-opacity-7">매콥짭잘할 양념에 기름기가 쪽 빠진 담백한 숯불 닭구이</p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$8.35</span>
-                    <h3 class="text-white"><a href="#" class="text-white">짜조(튀긴 스프링롤)</a></h3>
+                    <h3 class="text-white"><a class="text-white">짜조(튀긴 스프링롤)</a></h3>
                     <p class="text-white text-opacity-7">양념한 고기와 야채를 반짱에 말아 기름에 튀긴 일품요리</p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$22.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">분팃느엉(고기구이국수)</a></h3>
+                    <h3 class="text-white"><a class="text-white">분팃느엉(고기구이국수)</a></h3>
                     <p class="text-white text-opacity-7">돼지고기볶음, 땅콩, 채소와 각종 향신채가 들어간 전통요리</p>
                   </div>
                 </div>
@@ -367,34 +366,34 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
                 <div class="col-md-6">
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$7.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">쩨(베트남 팥빙수)</a></h3>
+                    <h3 class="text-white"><a class="text-white">쩨(베트남 팥빙수)</a></h3>
                     <p class="text-white text-opacity-7">코코넛,쌀떡 땅콩 등 원하는 대로 담아 먹는 시원한 디저트</p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$10.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">반베오(작은 쌀 부침개)</a></h3>
+                    <h3 class="text-white"><a class="text-white">반베오(작은 쌀 부침개)</a></h3>
                     <p class="text-white text-opacity-7">작은 종지위에 생선,새우튀김이 올라가는 디저트</p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$15.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">반꾸온티느응(월남쌈)</a></h3>
+                    <h3 class="text-white"><a class="text-white">반꾸온티느응(월남쌈)</a></h3>
                     <p class="text-white text-opacity-7">라이스 페이퍼에 각종 고기와 야채를 넣고 찐 음식</p>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$10.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">반쎄오(베트남 부침개)</a></h3>
+                    <h3 class="text-white"><a class="text-white">반쎄오(베트남 부침개)</a></h3>
                     <p class="text-white text-opacity-7">프라이팬에 쌀가루 반죽을 부쳐 먹는 베트남 대표음식</p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$2.35</span>
-                    <h3 class="text-white"><a href="#" class="text-white">소프트 아이스크림</a></h3>
+                    <h3 class="text-white"><a class="text-white">소프트 아이스크림</a></h3>
                     <p class="text-white text-opacity-7">부드럽고 시원한 아이스크림</p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$5.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">푸딩(딸기, 사과, 오렌지)</a></h3>
+                    <h3 class="text-white"><a class="text-white">푸딩(딸기, 사과, 오렌지)</a></h3>
                     <p class="text-white text-opacity-7">상큼하고 시원하고 부드러운 푸딩</p>
                   </div>
                 </div>
@@ -405,34 +404,34 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
                 <div class="col-md-6">
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$5.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">신또(과일 스무디)</a></h3>
+                    <h3 class="text-white"><a class="text-white">신또(과일 스무디)</a></h3>
                     <p class="text-white text-opacity-7"></p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$2.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">코카 콜라 , 코카 제로 콜라</a></h3>
+                    <h3 class="text-white"><a class="text-white">코카 콜라 , 코카 제로 콜라</a></h3>
                     <p class="text-white text-opacity-7"></p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$1.50</span>
-                    <h3 class="text-white"><a href="#" class="text-white">환타(오렌지, 사과, 포도)</a></h3>
+                    <h3 class="text-white"><a class="text-white">환타(오렌지, 사과, 포도)</a></h3>
                     <p class="text-white text-opacity-7"></p>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$10.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">생맥주 1000CC</a></h3>
+                    <h3 class="text-white"><a class="text-white">생맥주 1000CC</a></h3>
                     <p class="text-white text-opacity-7"></p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$2.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">스파클링 미네랄 워터</a></h3>
+                    <h3 class="text-white"><a class="text-white">스파클링 미네랄 워터</a></h3>
                     <p class="text-white text-opacity-7"></p>
                   </div>
                   <div class="food-menu mb-5">
                     <span class="d-block text-primary h4 mb-3">$7.00</span>
-                    <h3 class="text-white"><a href="#" class="text-white">라임 주스</a></h3>
+                    <h3 class="text-white"><a  class="text-white">라임 주스</a></h3>
                     <p class="text-white text-opacity-7"></p>
                   </div>
                 </div>
@@ -456,7 +455,7 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
           <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="100">
 
             <div class="media media-custom d-block mb-4 h-100">
-              <a href="#" class="mb-4 d-block"><img src="images/event1.jpg" alt="Image placeholder" class="img-fluid"></a>
+              <a class="mb-4 d-block"><img src="images/event1.jpg" alt="Image placeholder" class="img-fluid"></a>
               <div class="media-body">
                 <span class="meta-post">2020-01-01 ~ 2020-01-31</span>
                 
@@ -468,7 +467,7 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
           </div>
           <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="200">
             <div class="media media-custom d-block mb-4 h-100">
-              <a href="#" class="mb-4 d-block"><img src="images/event2.jpg" alt="Image placeholder" class="img-fluid"></a>
+              <a class="mb-4 d-block"><img src="images/event2.jpg" alt="Image placeholder" class="img-fluid"></a>
               <div class="media-body">
                 <span class="meta-post">2020-01-23 ~ 2020-01-29</span>
                 <h2 class="mt-0 mb-3"><br><a href="#">베트남 설날 패키지</a></h2>
@@ -478,7 +477,7 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
           </div>
           <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="300">
             <div class="media media-custom d-block mb-4 h-100">
-              <a href="#" class="mb-4 d-block"><img src="images/event3.jpg" alt="Image placeholder" class="img-fluid"></a>
+              <a class="mb-4 d-block"><img src="images/event3.jpg" alt="Image placeholder" class="img-fluid"></a>
               <div class="media-body">
                 <span class="meta-post">2020-02-01 ~ 2020-02-28</span>
                 <h2 class="mt-0 mb-3"><br><a href="#">프로포즈 패키지</a></h2>
@@ -499,7 +498,7 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
               <h2 class="text-white font-weight-bold">A Best Place To Stay. Reserve Now!</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right" data-aos="fade-up" data-aos-delay="200">
-              <a href="Reservation/Reservation.html" class="btn btn-outline-white-primary py-3 text-white px-5">Reserve Now</a>
+              <a href="Reservation/Reservation.jsp" class="btn btn-outline-white-primary py-3 text-white px-5">Reserve Now</a>
             </div>
           </div>
         </div>
@@ -520,7 +519,7 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
               <div class="form-group">
               <p>Sign up for our newsletter</p>
                 <input type="email" class="form-control" placeholder="Email...">
-           		<button type="submit" class="btn" style="top:122px; left:450px;"><span class="fa fa-paper-plane"></span></button>
+           		<button type="submit" class="btn" style="top:100px; left:450px;"><span class="fa fa-paper-plane"></span></button>
               </div>
             </form>
           </div>
@@ -535,11 +534,11 @@ response.addCookie(cookieName);	//해당 쿠키는  response객체에 저장한�
           </p>
             
           <p class="col-md-6 text-right social">
-            <a href="#"><span class="fa fa-tripadvisor"></span></a>
-            <a href="#"><span class="fa fa-facebook"></span></a>
-            <a href="#"><span class="fa fa-twitter"></span></a>
-            <a href="#"><span class="fa fa-linkedin"></span></a>
-            <a href="#"><span class="fa fa-vimeo"></span></a>
+            <a ><span class="fa fa-tripadvisor"></span></a>
+            <a ><span class="fa fa-facebook"></span></a>
+            <a ><span class="fa fa-twitter"></span></a>
+            <a ><span class="fa fa-linkedin"></span></a>
+            <a ><span class="fa fa-vimeo"></span></a>
           </p>
         </div>
       </div>

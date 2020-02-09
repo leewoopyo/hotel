@@ -21,10 +21,13 @@
     <!-- Theme Style -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mycss.css">
-
     
+
   </head>
   <body>
+  
+  
+  
 <!-- ****************************헤더 시작*****************************  -->
 <!-- 상당의 흰색 바를 나타내는 부분 -->
 	<header class="site-header js-site-header">
@@ -32,14 +35,42 @@
       <div class="container-fluid">
         <div class="row align-items-center">
         <!-- 제목 나타내는 영역 -->
-          <div class="col-6 col-lg-4 site-logo" data-aos="fade"><a href="index.jsp">JOA HOTEL</a></div>
+          <div class="col-8 col-lg-8 site-logo" data-aos="fade" style="display: inline-block;"><a href="index.jsp">JOA HOTEL</a>
+          <%
+          if(session.getAttribute("login_id") == null){ %>
+          	<a href="./admin/adm_main.html" style="display:none; left: 60%; position: sticky;">관리자 페이지</a>       
+          <%}else if(session.getAttribute("login_id").equals("admin")){ %>
+          	<a href="./admin/adm_main.html" style="display:inline-block; left: 60%; position: sticky;">관리자 페이지</a>       
+          <%}else{ %>
+          <a href="./admin/adm_main.html" style="display:none; left: 60%; position: sticky;">관리자 페이지</a>   
+          <%} %>
+          <% 
+          if(session.getAttribute("login_ok") == null){ 
+          %>
+          	  <a href="./login/logout.jsp"  id="logout" style="display:none; position: fixed; left: 100%; width: fit-content;">LOG OUT</a>
+          	  <a href="./login/login.jsp?jump=../Welcome.jsp"  id="login" style="display:inline-block; position: fixed; left: 100%; width: fit-content;">LOG IN</a>      
+          <%
+          }else if(session.getAttribute("login_ok").equals("yes")){
+          %>  
+        	  <a href="./login/logout.jsp"  id="logout" style="display:inline-block; position: fixed; left: 100%; width: fit-content;">LOG OUT</a>
+        	  <a href="./login/login.jsp?jump=../Welcome.jsp"  id="login" style="display:none; position: fixed; left: 100%; width: fit-content;">LOG IN</a>
+          <%
+          }
+          %>
+		</div>
+
           <!-- 헤더 쪽 좌 상단 예약 체이지 이동하게 하는 버튼 설정 fixed설정으로 인해 화면 스크롤을 이동시켜도 계속 화면에 붙어있는 효과를 준다. -->
-          <a href="Reservation/Reservation.html" class="btn btn-outline-white-primary py-3 text-white px-5" data-aos="fade" 
-          style="color:black !important; border: 2px solid black; position: fixed; right:3%;">Reserve Now</a>
+		<div class="col-4 col-lg-4" style="display: inline-block;">
+          <a href="Reservation/Reservation.jsp" class="btn btn-outline-white-primary py-3 text-white px-5" data-aos="fade" 
+          style="color:black !important; border: 2px solid black; position: fixed; right:3%; top: 5px;">Reserve Now</a>
+          </div>
         </div>
       </div>
     </header>
 <!-- ****************************헤더 끝*****************************  -->
+
+
+
 <!-- ****************************헤더 밑 배너 부분 *****************************  -->
     <section class="inner-page bg-image overlay" style="height:300px; min-height: 300px; background-image: url(banner/banner1.jpg); background-size: cover;" data-stellar-background-ratio="0.5">
       <div class="container" style="height:300px;">
@@ -78,32 +109,32 @@
 				<a>프로모션</a>
 			</li>
 			<li class="menu_6">
-				<a href="map/map.html" target="frame">찾아오시는길</a>
+				<a href="./map/map.jsp">찾아오시는길</a>
 			</li>
 		</ul>
 
 		<div class="header_depth2">
 			<div class="depth2_wrap">
 				<ul class="depth2_menu1">
-					<li><a href="./introduction/photo_tour.html" target="frame">Photo Tour</a></li>
-					<li><a href="./introduction/notice.jsp" target="frame">notice</a></li>
-					<li><a href="./introduction/review.jsp" target="frame">review</a></li>
+					<li><a href="./introduction/photo_tour.jsp">Photo Tour</a></li>
+					<li><a href="./introduction/notice.jsp">notice</a></li>
+					<li><a href="./introduction/review.jsp">review</a></li>
 				</ul>
 
 				<ul class="depth2_menu2">
-					<li><a href="./rooms/standard.html" target="frame">standard</a></li>
-					<li><a href="./rooms/suite.html" target="frame">suite</a></li>
-					<li><a href="./rooms/royal.html" target="frame">royal</a></li>
+					<li><a href="./rooms/standard.jsp">standard</a></li>
+					<li><a href="./rooms/suite.jsp" >suite</a></li>
+					<li><a href="./rooms/royal.jsp">royal</a></li>
 				</ul>
 				<!-- 편의 시설 dropdown 부분 내용, 링크 -->
 				<ul class="depth2_menu4">
-					<li><a href="./Facilities/Fitness_club.html" target="frame">Fitness Club</a></li>
-					<li><a href="./Facilities/Gift_shop.html" target="frame">Gift Shop</a></li>
-					<li><a href="./Facilities/Healing_therapy.html" target="frame">Healing therapy</a></li>
+					<li><a href="./Facilities/Fitness_club.jsp">Fitness Club</a></li>
+					<li><a href="./Facilities/Gift_shop.jsp">Gift Shop</a></li>
+					<li><a href="./Facilities/Healing_therapy.jsp">Healing therapy</a></li>
 				</ul>
 				<ul class="depth2_menu6">
-					<li><a href="./event/event.html" target="frame">Event</a></li>
-					<li><a href="./event/Tour_Course.html" target="frame">Tour Course</a></li>
+					<li><a href="./event/event.jsp">Event</a></li>
+					<li><a href="./event/Tour_Course.jsp">Tour Course</a></li>
 				</ul>
 			</div>
 		</div>
@@ -111,29 +142,44 @@
 	</div>
 </section>
 
-<!-- 내용 크기만큼 프레임 크기 늘리기 -->
-<script>
-//<![CDATA[
-function calcHeight(){
- //find the height of the internal page
- var the_height=document.getElementById('frame').contentWindow.
- document.body.scrollHeight;
 
- //change the height of the iframe
- document.getElementById('frame').height = the_height;
-
- //document.getElementById('the_iframe').scrolling = "no";
- document.getElementById('frame').style.overflow = "hidden";
-}
-//	 	
-</script>
-
-
-<!-- 게시판 출력 부분 -->
+<!-------------------------------------------------------------------- 본문 내용 출력 부분 ----------------------------------------------------------------->
 <section class="section " id="dgwrap-content" style="">
-	<div class="container content_middle list" id="contents">
-		<iframe src="intro.html" name="frame" id="frame" onload="calcHeight();" scrolling="no" style="overflow-x:hidden; overflow:auto; width:100%; min-height:500px;">
-		</iframe>
+	<div class="container" data-aos="fade-up">
+		<div class="row justify-content-center text-center mb-5">
+			<div class="col-md-7">
+				<h2 class="heading">Intro</h2>
+				<p></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- START slider -->
+				<div class="mb-5">
+					<div style="text-align: center;">
+						<a><img src="images/intro.jpg" alt="Image placeholder"
+							class=""></a>
+							
+							<div style="height:20px;"><hr style="border:2px solid;"></div>
+						<div class="room-infomation">
+							<h2 class="blind" style="text-align: left;">호텔정보</h2>
+							<div class="tb-responsive view-type">
+								<table class="rwd-table">
+									<tbody>
+										<tr style="border-top: 1px solid #aaa;">
+											<th style="font-size:20px;">
+아름다운 미케 비치(My Khe Beach)를 마주한 4성급 호텔로 도보 약 5분이면 해변가에 닿을 수 있으며 차량 이동 시 다낭 대성당(Nha Tho Con Ga)까지 약 8분, 오행산(Ngu Hanh Son)까지 약 10~15분가량 소요된다.
+깔끔하게 꾸며진 모던한 객실에서 바다 또는 도시의 전망을 즐길 수 있으며 객실 내 편의시설로 에어컨, LCD TV, 무선 인터넷, 미니바, 커피/티 메이커 등이 완비되어 있다.
+이 외에 바와 레스토랑, 베이커리 숍, 피트니스센터, 야외 수영장, 스파 시설, 회의/연회장, 노래방 등 다채로운 부대시설이 호텔 내에 마련되어 있다.</th>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END slider -->
+			</div>
+		</div>
 	</div>
 </section>
 
@@ -144,7 +190,7 @@ function calcHeight(){
               <h2 class="text-white font-weight-bold">A Best Place To Stay. Reserve Now!</h2>
             </div>
             <div class="col-12 col-md-6 text-center text-md-right" data-aos="fade-up" data-aos-delay="200">
-              <a href="Reservation/Reservation.html" class="btn btn-outline-white-primary py-3 text-white px-5">Reserve Now</a>
+              <a href="Reservation/Reservation.jsp" class="btn btn-outline-white-primary py-3 text-white px-5">Reserve Now</a>
             </div>
           </div>
         </div>
@@ -152,11 +198,12 @@ function calcHeight(){
 
     <footer class="section footer-section">
       <div class="container">
+        <div class="row mb-4">
           <div class="col-md-3 mb-5 pr-md-5 contact-info">
             <!-- <li>198 West 21th Street, <br> Suite 721 New York NY 10016</li> -->
-            <p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Address:</span> <span> 198 West 21th Street, <br> Suite 721 New York NY 10016</span></p>
-            <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Phone:</span> <span> (+1) 435 3533</span></p>
-            <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email:</span> <span> info@domain.com</span></p>
+                     <p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Address</span> <span> 369W+JM Phước Mỹ, Sơn Trà, Đà Nẵng, Việt Nam, Phường Phước Mỹ, Quận Sơn Trà, Đà Nẵng, 베트남 <br></span></p>
+            <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Phone</span> <span> (+1) 435 3533</span></p>
+            <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email</span> <span> KOPO15@kopoctc.com</span></p>
           </div>
           <div class="col-md-3 mb-5">
             <p>Sign up for our newsletter</p>
@@ -201,5 +248,18 @@ function calcHeight(){
     
     <script src="js/main.js"></script>
     <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    
+<!--      <script>
+	    $( document ).ready(function() {
+	        console.log( "111111" );
+	        window['hotel'] = {
+	    	        onClickLogin: function() {
+ 		    	        console.log('onClickLogin 1111');
+ 		    	       	  $("#logout").css("display","inline-block");
+ 		    	       	  $("#login").css("display","none");
+		    	    }
+	    	};
+	    });
+    </script> -->
   </body>
 </html>
